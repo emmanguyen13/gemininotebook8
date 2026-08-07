@@ -48,6 +48,22 @@ const tasks: Task[] = [
 
 const peerTemplate = `Một điểm mạnh tôi nhìn thấy:\n\nMột câu hỏi tôi muốn hỏi:\n\nMột gợi ý nhỏ để sản phẩm rõ mục tiêu hơn:`;
 
+const courseDays = [
+  ["08/08", "Day 1", "Notebook Brief + Quick Win"],
+  ["09/08", "Day 2", "Source Map + làm sạch nguồn"],
+  ["10/08", "Day 3", "Hỏi đáp có trích dẫn"],
+  ["11/08", "Day 4", "Trích xuất insight và ghi chú"],
+  ["12/08", "Day 5", "So sánh và tổng hợp nhiều nguồn"],
+  ["13/08", "Day 6", "Infographic từ nguồn"],
+  ["14/08", "Day 7", "Worksheet có bằng chứng"],
+  ["15/08", "Day 8", "Answer key + mini rubric"],
+  ["16/08", "Day 9", "Phân tích và feedback"],
+  ["17/08", "Day 10", "SOP + onboarding assistant"],
+  ["18/08", "Day 11", "Kết nối hệ sinh thái AI"],
+  ["19/08", "Day 12", "Phát triển tài sản số"],
+  ["20/08", "Day 13", "Capstone: hệ thống hoàn chỉnh"],
+];
+
 function CopyButton({ text }: { text: string }) {
   const [done, setDone] = useState(false);
   return <button className="copy" onClick={async()=>{await navigator.clipboard.writeText(text);setDone(true);setTimeout(()=>setDone(false),1400)}}>{done ? "Đã sao chép ✓" : "Sao chép prompt"}</button>
@@ -81,6 +97,15 @@ export default function Home() {
     </section>
 
     <div className="progressWrap"><div className="progressMeta"><b>Tiến độ Day 1</b><span>{done.length}/{tasks.length} nhiệm vụ • {pct}%</span></div><div className="track"><i style={{width:`${pct}%`}}/></div></div>
+
+    <section className="courseMap">
+      <div className="courseMapHead"><div><p className="eyebrow">LỘ TRÌNH 13 NGÀY</p><h2>Một hệ thống.<br/>Mỗi ngày một lớp mới.</h2></div><p>Trang này sẽ lớn dần cùng khóa học. Sau 13 ngày, thầy cô có một trung tâm ôn tập duy nhất gồm nội dung, prompt, sản phẩm và checklist của toàn bộ hành trình.</p></div>
+      <div className="dayRail">
+        {courseDays.map((d,i)=><div key={d[1]} className={`dayCard ${i===0?"active":"locked"}`}>
+          <div><span>{d[0]}</span><b>{d[1]}</b></div><p>{d[2]}</p><small>{i===0?"ĐANG HỌC":"SẮP MỞ"}</small>
+        </div>)}
+      </div>
+    </section>
 
     <section className="principle">
       <p>NGUYÊN TẮC NGÀY 1</p>
