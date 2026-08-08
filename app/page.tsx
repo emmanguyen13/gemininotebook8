@@ -6,43 +6,36 @@ type Task = { id: string; kicker: string; title: string; time: string; intro: st
 
 const tasks: Task[] = [
   {
-    id: "brief", kicker: "NHIỆM VỤ 01", title: "Chọn một Notebook đáng để xây", time: "8 phút",
-    intro: "Đừng tạo Notebook theo tên công cụ. Hãy tạo Notebook theo một công việc đang lấy thời gian của thầy cô.",
-    actions: ["Chọn một công việc lặp lại hoặc thường phải tổng hợp nhiều tài liệu.", "Xác định rõ ai sẽ sử dụng Notebook.", "Đặt tên theo công việc cụ thể, không đặt tên quá rộng."],
-    prompt: `TÊN NOTEBOOK:\n\n1. Người sử dụng Notebook này là ai?\n2. Notebook cần hỗ trợ công việc gì?\n3. Ba câu hỏi quan trọng Notebook phải trả lời được?\n4. Sản phẩm tôi muốn tạo từ Notebook?\n5. Những nguồn tôi đang có?\n6. Những thông tin AI không được tự suy đoán?\n7. Những quyết định cuối cùng vẫn phải do con người thực hiện?`
+    id: "brief", kicker: "VIỆC 01", title: "Chọn một công việc thật", time: "5 phút",
+    intro: "Chọn một việc thầy cô đang làm lặp lại. Không bắt đầu bằng công cụ và không ôm cả chương trình.",
+    actions: ["Xác định ai sẽ sử dụng Notebook.", "Chọn đúng một công việc cần hỗ trợ.", "Nêu điều AI không được tự suy đoán và điều con người vẫn quyết định."],
+    prompt: `TÊN NOTEBOOK:\n\nNGƯỜI SỬ DỤNG:\nNotebook này dành cho ai?\n\nCÔNG VIỆC CẦN HỖ TRỢ:\nTôi muốn Notebook giúp mình làm việc gì?\n\nSẢN PHẨM TƯƠNG LAI:\nSau này tôi muốn tạo gì từ Notebook?\n\nGIỚI HẠN:\nNotebook không được tự suy đoán điều gì?\n\nQUYẾT ĐỊNH CỦA CON NGƯỜI:\nĐiều gì vẫn phải do tôi kiểm tra hoặc quyết định?`
   },
   {
-    id: "sources", kicker: "NHIỆM VỤ 02", title: "Tạo bộ nguồn tối thiểu", time: "10 phút",
-    intro: "Một bộ nguồn nhỏ nhưng rõ ràng có giá trị hơn một Notebook chứa mọi thứ.",
-    actions: ["Tạo New notebook và đặt tên theo Notebook Brief.", "Thêm 3–5 nguồn chính thức, đúng phiên bản và trực tiếp liên quan.", "Loại bản trùng, bản cũ và dữ liệu cá nhân không cần thiết."],
-    prompt: `Chỉ sử dụng các nguồn hiện có trong Notebook này.\n\nHãy kiểm tra bộ nguồn theo bốn mục:\n1. Các chủ đề và thông tin chính hiện có.\n2. Những câu hỏi bộ nguồn đã đủ khả năng trả lời.\n3. Những thông tin còn thiếu để phục vụ mục tiêu của Notebook.\n4. Những nguồn trùng lặp, mâu thuẫn hoặc cần kiểm tra lại.\n\nVới mỗi nhận định quan trọng, hãy chỉ rõ nguồn liên quan. Không tự bổ sung kiến thức bên ngoài. Nếu chưa đủ bằng chứng, hãy nói: “Chưa đủ thông tin trong nguồn”.`,
-    wow: "WOW #1 — Bấm mở ít nhất hai trích dẫn. Giá trị không nằm ở câu trả lời nhanh, mà ở khả năng nhìn thấy câu trả lời đến từ đâu."
+    id: "sources", kicker: "VIỆC 02", title: "Tạo Notebook và thêm đúng ba nguồn", time: "15 phút",
+    intro: "Một nguồn gốc, một nguồn thực hành và một nguồn kiểm tra là đủ để bắt đầu.",
+    actions: ["Mở NotebookLM → Create new notebook.", "Đặt tên theo mẫu [Đối tượng] – [Công việc].", "Upload đúng ba nguồn: nguồn gốc, nguồn thực hành, nguồn kiểm tra.", "Mở từng nguồn, loại bản cũ, bản trùng và dữ liệu cá nhân không cần thiết."],
+    prompt: `Chỉ sử dụng ba nguồn đang được chọn trong Notebook này.\n\nHãy giúp tôi xác định:\n1. Nội dung hoặc vấn đề chính mà các nguồn đang cùng hỗ trợ.\n2. Ba thông tin quan trọng nhất đối với công việc của tôi.\n3. Một điểm còn thiếu hoặc chưa rõ.\n4. Một câu hỏi tiếp theo tôi nên đặt ra.\n\nVới mỗi nhận định quan trọng, hãy dẫn nguồn. Không bổ sung kiến thức bên ngoài. Nếu chưa đủ bằng chứng, hãy nói rõ: “Chưa đủ thông tin trong các nguồn đã chọn”.`,
+    wow: "WOW #1 — Mở ít nhất hai trích dẫn. Điều đáng giá không phải câu trả lời nhanh, mà là khả năng kiểm tra câu trả lời đến từ đâu."
   },
   {
-    id: "focus", kicker: "NHIỆM VỤ 03", title: "Chọn một nội dung thật nhỏ", time: "7 phút",
-    intro: "Quick Win ngày 1 chỉ cần đủ nhỏ để hoàn thành và đủ thật để sử dụng.",
-    actions: ["Chọn một điểm ngữ pháp, nhóm từ, chức năng giao tiếp hoặc một phần quy trình.", "Không chọn cả Unit, cả khóa học hoặc toàn bộ hệ thống.", "Xác định một bằng chứng quan sát được."],
-    prompt: `Chỉ sử dụng các nguồn trong Notebook này.\n\nTừ các nguồn hiện có, hãy chọn một nội dung nhỏ có thể chuyển thành hoạt động thực hành trong 10–15 phút.\n\nTrình bày:\n1. Nội dung trọng tâm.\n2. Người học hoặc người sử dụng phù hợp.\n3. Điều họ cần hiểu hoặc làm được.\n4. Ba thông tin quan trọng từ nguồn.\n5. Một lỗi hoặc hiểu nhầm có thể xảy ra.\n6. Một nhiệm vụ ngắn tạo ra bằng chứng quan sát được.\n\nVới mỗi nhận định quan trọng, hãy dẫn nguồn. Nếu chưa đủ thông tin, ghi rõ “Chưa đủ bằng chứng trong nguồn”.`
+    id: "citation", kicker: "VIỆC 03", title: "Kiểm tra câu trả lời đầu tiên", time: "8 phút",
+    intro: "Đọc câu trả lời như một người kiểm chứng, không như người nhận đáp án sẵn.",
+    actions: ["Mở hai trích dẫn và đọc đúng đoạn nguồn.", "Kiểm tra NotebookLM có diễn giải quá rộng không.", "Ghi một thông tin đúng, một điều còn nghi ngờ và một nguồn còn thiếu."],
+    prompt: `MỘT THÔNG TIN ĐÚNG VÀ CÓ CĂN CỨ:\n\nMỘT THÔNG TIN TÔI VẪN CẦN KIỂM TRA:\n\nMỘT NGUỒN TÔI CẦN BỔ SUNG:`
   },
   {
-    id: "worksheet", kicker: "QUICK WIN", title: "Tạo mini worksheet 10–15 phút", time: "18 phút",
-    intro: "Biến một tài liệu cũ thành sản phẩm có mục tiêu, tiến trình và bằng chứng học tập.",
-    actions: ["Điền người học, mục tiêu và giới hạn trước khi chạy prompt.", "Kiểm tra mục tiêu trước; chỉ chỉnh hình thức sau.", "Giữ NOTICE → PRACTICE → USE → CHECK."],
-    prompt: `Chỉ sử dụng các nguồn trong Notebook này và nội dung trọng tâm đã được xác nhận.\n\nHãy tạo một mini worksheet có thể hoàn thành trong 10–15 phút.\n\nĐối tượng: [độ tuổi/trình độ]\nMục tiêu: Sau hoạt động, người học có thể [hành động quan sát được].\n\nA. NOTICE — nhận ra nội dung trọng tâm trong ngữ cảnh.\nB. PRACTICE — 3–5 câu thực hành có hỗ trợ.\nC. USE — tự tạo câu trả lời hoặc áp dụng vào tình huống mới.\nD. CHECK — một exit ticket tạo ra bằng chứng rõ ràng.\n\nViết instruction trực tiếp cho người học. Không thêm kiến thức ngoài nguồn. Không đưa đáp án vào worksheet. Sau mỗi phần, ghi bằng chứng giáo viên cần quan sát và đánh dấu nội dung vẫn cần giáo viên kiểm tra.`,
-    wow: "WOW #2 — Một nguồn đang nằm trong thư mục đã trở thành một worksheet có thể chạy thử. Hãy kiểm tra: mục tiêu và CHECK có khớp nhau không?"
+    id: "map", kicker: "QUICK WIN", title: "Tạo Bản đồ khởi động", time: "7 phút",
+    intro: "Ngày 1 chưa cần worksheet. Quick Win là một bản đồ ngắn cho biết Notebook đã làm được gì và cần gì tiếp theo.",
+    actions: ["Chạy prompt Bản đồ khởi động.", "Kiểm tra các trích dẫn quan trọng.", "Chọn Save to Note và đặt tên DAY 1 – BẢN ĐỒ KHỞI ĐỘNG."],
+    prompt: `Chỉ sử dụng các nguồn đang được chọn.\n\nHãy tạo “Bản đồ khởi động” cho Notebook này gồm:\n1. Mục đích của Notebook — một câu.\n2. Người sử dụng chính.\n3. Ba việc Notebook đã có thể hỗ trợ dựa trên nguồn hiện tại.\n4. Ba câu hỏi hữu ích tôi có thể hỏi ngay.\n5. Hai sản phẩm tôi có thể phát triển trong những ngày tiếp theo.\n6. Một nguồn còn thiếu.\n7. Ba quyết định vẫn phải do con người kiểm tra hoặc thực hiện.\n\nMỗi nhận định quan trọng phải có trích dẫn. Không tự bổ sung khả năng chưa được chứng minh bởi các nguồn.`,
+    wow: "WOW #2 — Từ ba tài liệu rời rạc, thầy cô đã có một bản đồ cho cả hệ thống sẽ xây trong 12 ngày tiếp theo."
   },
   {
-    id: "key", kicker: "NHIỆM VỤ 05", title: "Tạo key hoặc mini rubric", time: "12 phút",
-    intro: "Câu đóng cần key. Nhiệm vụ mở cần tiêu chí. Giáo viên vẫn quyết định đáp án chấp nhận được và điểm cuối cùng.",
-    actions: ["Phân loại câu CLOSED, SEMI-OPEN hoặc OPEN.", "Kiểm tra phương án hợp lệ khác.", "Không để AI tính hoặc quyết định điểm cuối cùng."],
-    prompt: `Dựa trên worksheet đã được tôi xác nhận:\n\n1. Phân loại từng câu: CLOSED, SEMI-OPEN hoặc OPEN.\n2. Với CLOSED: cung cấp đáp án và giải thích dựa trên nguồn.\n3. Với SEMI-OPEN: liệt kê phương án hợp lệ và giới hạn chấp nhận.\n4. Với OPEN: tạo mini rubric tối đa ba tiêu chí, mô tả bằng chứng quan sát được.\n5. Đánh dấu câu vẫn cần giáo viên phán đoán.\n\nKhông tính hoặc quyết định điểm cuối cùng. Không thêm tiêu chí chưa được dạy hoặc chưa xuất hiện trong nhiệm vụ.`,
-    wow: "WOW #3 — Thầy cô không chỉ có một worksheet đẹp; thầy cô có một gói nhỏ gồm nguồn, nhiệm vụ, bằng chứng và cách kiểm tra."
-  },
-  {
-    id: "facebook", kicker: "NỘP BÀI", title: "Chia sẻ Quick Win trong nhóm Facebook", time: "10 phút",
-    intro: "Đăng sản phẩm đủ để cộng đồng nhìn thấy mối liên hệ Nguồn → Mục tiêu → Nhiệm vụ → Bằng chứng.",
-    actions: ["Đính kèm ít nhất hai minh chứng.", "Ẩn dữ liệu cá nhân và không đăng tài liệu gốc khi chưa có quyền.", "Phản hồi một thành viên bằng nhận xét có chất lượng."],
-    prompt: `[DAY 1] Họ tên – Tên Notebook – Quick Win\n\n1. TÊN NOTEBOOK\n[Điền]\n\n2. NGƯỜI SỬ DỤNG\n[Điền]\n\n3. CÔNG VIỆC NOTEBOOK HỖ TRỢ\n[Điền]\n\n4. BA NGUỒN ĐẦU TIÊN\n- Nguồn 1:\n- Nguồn 2:\n- Nguồn 3:\n\n5. QUICK WIN NGÀY 1\nTôi đã tạo: [mini worksheet / infographic / tài sản khác]\n\n6. KHOẢNH KHẮC WOW CỦA TÔI\n[Điền]\n\n7. ĐIỂM TÔI ĐÃ KIỂM TRA BẰNG CON NGƯỜI\n[Trích dẫn, mục tiêu, câu hỏi, đáp án, ngôn ngữ, dữ liệu…]\n\n8. MỘT ĐIỀU TÔI MUỐN CẢI THIỆN NGÀY MAI\n[Điền]`
+    id: "facebook", kicker: "NỘP BÀI", title: "Chia sẻ Day 1 trong nhóm Facebook", time: "5 phút",
+    intro: "Chỉ cần hai ảnh và một bài viết ngắn. Không đăng toàn bộ tài liệu nguồn.",
+    actions: ["Đính kèm ảnh Notebook có ba nguồn.", "Đính kèm ảnh Bản đồ khởi động hoặc câu trả lời có trích dẫn.", "Ẩn dữ liệu cá nhân và phản hồi một thành viên khác."],
+    prompt: `[DAY 1] Họ tên – Tên Notebook\n\n1. TÊN NOTEBOOK\n[Điền]\n\n2. NOTEBOOK GIÚP TÔI LÀM VIỆC GÌ?\n[Điền một công việc cụ thể]\n\n3. BA NGUỒN ĐẦU TIÊN\n- Nguồn gốc:\n- Nguồn thực hành:\n- Nguồn kiểm tra:\n\n4. KHOẢNH KHẮC WOW\n[Điều tôi nhận ra khi mở và kiểm tra trích dẫn]\n\n5. MỘT NGUỒN CÒN THIẾU\n[Điền]\n\n6. MỘT VIỆC TÔI MUỐN NOTEBOOK HỖ TRỢ TIẾP THEO\n[Điền]`
   }
 ];
 
@@ -84,14 +77,14 @@ export default function Home() {
         <div>
           <p className="eyebrow">BẮT ĐẦU TỪ CÔNG VIỆC THẬT</p>
           <h1>Tạo Notebook đầu tiên.<br/><em>Có Quick Win ngay hôm nay.</em></h1>
-          <p className="lead">Xây bộ nguồn nhỏ, kiểm tra trích dẫn và biến một nội dung thật thành mini worksheet 10–15 phút.</p>
+          <p className="lead">Tạo một Notebook rõ mục đích, thêm đúng ba nguồn và kiểm tra câu trả lời đầu tiên trong 30–40 phút.</p>
           <a href="#journey" className="primary">Bắt đầu Day 1 <span>↓</span></a>
         </div>
         <div className="outcome">
           <span>KẾT QUẢ CUỐI NGÀY</span>
           <strong>01</strong><p>Notebook Brief</p>
-          <strong>3–5</strong><p>Nguồn ban đầu</p>
-          <strong>01</strong><p>Mini worksheet + key</p>
+          <strong>03</strong><p>Nguồn ban đầu</p>
+          <strong>01</strong><p>Bản đồ khởi động</p>
         </div>
       </div>
     </section>
@@ -132,8 +125,8 @@ export default function Home() {
 
     <section className="proof">
       <div><p className="eyebrow">MINH CHỨNG CẦN ĐÍNH KÈM</p><h2>Chọn ít nhất hai.</h2></div>
-      <ul><li>Ảnh Notebook và danh sách nguồn</li><li>Ảnh câu trả lời có trích dẫn</li><li>Ảnh hoặc PDF mini worksheet</li><li>Ảnh answer key hoặc mini rubric</li></ul>
-      <div className="privacy"><b>Không đăng</b><span>Tài liệu gốc chưa có quyền chia sẻ • dữ liệu nhận diện học sinh/phụ huynh • answer key trong bản dành cho học sinh</span></div>
+      <ul><li>Ảnh Notebook với đúng ba nguồn</li><li>Ảnh câu trả lời có trích dẫn</li><li>Ảnh Bản đồ khởi động đã lưu</li><li>Một nguồn còn thiếu cần bổ sung</li></ul>
+      <div className="privacy"><b>Không đăng</b><span>Tài liệu gốc chưa có quyền chia sẻ • dữ liệu nhận diện học sinh, phụ huynh hoặc nhân sự • nội dung nội bộ nhạy cảm không cần thiết</span></div>
     </section>
 
     <section className="peer">
