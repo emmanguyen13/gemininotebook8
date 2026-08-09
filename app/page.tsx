@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 
 type Task = { id: string; kicker: string; title: string; time: string; intro: string; actions: string[]; prompt?: string; wow?: string };
 
@@ -71,8 +72,8 @@ function CopyButton({ text }: { text: string }) {
   return <button className="copy" onClick={async()=>{await navigator.clipboard.writeText(text);setDone(true);setTimeout(()=>setDone(false),1400)}}>{done ? "Đã sao chép ✓" : "Sao chép prompt"}</button>
 }
 
-export default function Home() {
-  const [day, setDay] = useState<1|2>(2);
+export function CourseExperience({ initialDay = 2 }: { initialDay?: 1|2 }) {
+  const day = initialDay;
   const [done, setDone] = useState<string[]>([]);
   const [open, setOpen] = useState<string>("purpose");
   const tasks = day===1 ? day1Tasks : day2Tasks;
@@ -103,9 +104,9 @@ export default function Home() {
     <section className="courseMap">
       <div className="courseMapHead"><div><p className="eyebrow">LỘ TRÌNH 13 NGÀY</p><h2>Một hệ thống.<br/>Mỗi ngày một lớp mới.</h2></div><p>Trang này sẽ lớn dần cùng khóa học. Sau 13 ngày, thầy cô có một trung tâm ôn tập duy nhất gồm nội dung, prompt, sản phẩm và checklist của toàn bộ hành trình.</p></div>
       <div className="dayRail">
-        {courseDays.map((d,i)=><button key={d[1]} onClick={()=>i<2&&setDay((i+1) as 1|2)} className={`dayCard ${i===day-1?"active":i<2?"available":"locked"}`}>
-          <div><span>{d[0]}</span><b>{d[1]}</b></div><p>{d[2]}</p><small>{i===day-1?"ĐANG MỞ":i<2?"XEM LẠI":"SẮP MỞ"}</small>
-        </button>)}
+        {courseDays.map((d,i)=>i<2?<Link key={d[1]} href={`/day-${i+1}/#journey`} className={`dayCard ${i===day-1?"active":"available"}`}>
+          <div><span>{d[0]}</span><b>{d[1]}</b></div><p>{d[2]}</p><small>{i===day-1?"ĐANG MỞ":"BẤM ĐỂ XEM"}</small>
+        </Link>:<div key={d[1]} className="dayCard locked"><div><span>{d[0]}</span><b>{d[1]}</b></div><p>{d[2]}</p><small>SẮP MỞ</small></div>)}
       </div>
     </section>
 
@@ -153,3 +154,5 @@ export default function Home() {
     <footer><b>Emma Nguyễn • TECH4EDU</b><span>Gemini Notebook Mastery K8</span></footer>
   </main>
 }
+
+export default function Home(){ return <CourseExperience initialDay={2}/> }
